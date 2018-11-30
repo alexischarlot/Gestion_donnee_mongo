@@ -18,6 +18,7 @@ app.use(express.static(path.join(__dirname + '/public')));
 require('./models/dbModel')(mongoose);
 
 app.get('/', function (req, res) {
+	console.log(req.query.t); //to get query in url
 	res.render('index', {});
 });
 
