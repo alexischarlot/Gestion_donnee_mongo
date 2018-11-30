@@ -1,0 +1,26 @@
+{
+  "name": "gestion_donnee_mongo",
+  "version": "1.0.0",
+  "description": "Gestion de données web Projet",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexischarlot/Gestion_donnee_mongo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alexischarlot/Gestion_donnee_mongo/issues"
+  },
+  "homepage": "https://github.com/alexischarlot/Gestion_donnee_mongo#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "mongoose": "^5.3.14",
+    "mustache": "^3.0.1",
+    "mustache-express": "^1.2.8"
+  }
+}
