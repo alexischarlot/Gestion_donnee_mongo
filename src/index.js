@@ -18,8 +18,18 @@ app.use(express.static(path.join(__dirname + '/public')));
 require('./models/dbModel')(mongoose);
 
 app.get('/', function (req, res) {
-	console.log(req.query.t); //to get query in url
-	res.render('index', {});
+	console.log(req.query); //to get query in url
+	res.render('index', {start: req.query.start, end: req.query.end});
+});
+
+app.get('/dep', function (req, res) {
+	q='/?start='+req.query.start+'&end='+req.query.end;
+	res.render('interest', {start: req.query.start, end: req.query.end, se: 1});
+});
+
+app.get('/ar', function (req, res) {
+	q='/?start='+req.query.start+'&end='+req.query.end;
+	res.render('interest', {start: req.query.start, end: req.query.end, se: 0});
 });
 
 app.listen(port);  
