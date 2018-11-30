@@ -1,18 +1,29 @@
 {{> header}}
     {{#se}}
-    <a href="/?start=35R&end={{end}}">
-        Clique
-    </a>
-    <a href="/?start=67R&end={{end}}">
-        Clique
-    </a>
+    <section>
+        <h1>Parking</h1>
+        <a href="/?start=35R&end={{end}}">
+            Clique
+        </a>
+    </ection>
+
+    <section>
+        <h1>Velostan</h1>
+        <a href="/?start=67R&end={{end}}">
+            Clique
+        </a>
+    </section>
+    
     {{/se}}
     {{^se}}
-    <a href="/?start={{start}}&end=34V">
-        Clique
-    </a>
-    <a href="/?start={{start}}&end=37V">
-        Clique
-    </a>
+    <section>
+        <a href="/?start={{start}}&end=34V">
+            Clique
+        </a>
+        <a href="/?start={{start}}&end=37V">
+            Clique
+        </a>
+    </section>
+    
     {{/se}}
 {{> footer}}
