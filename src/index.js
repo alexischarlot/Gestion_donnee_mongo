@@ -18,22 +18,7 @@ app.use(express.static(path.join(__dirname + '/public')));
 require('./models/dbModel')(mongoose);
 
 app.get('/', function (req, res) {
-	let connected = false;
-	if (req.session.email) {
-		connected = true;
-		User.findOne({
-			email: req.session.email
-		}, function (err, user) {
-			if (err) return handleError(err)
-			user.boxes.forEach(function (element) {
-
-				if (element.isCurrent) {
-					req.session.currentBox = element.id;
-				}
-			});
-		});
-	}
-	res.redirect('/catalog');
+	res.render('index', {});
 });
 
 app.listen(port);  
