@@ -5,13 +5,16 @@
         <a href="/?start=35R&end={{end}}">
             Clique
         </a>
+        {{#park}}
+            <a href="/?start={{name}}&end={{end}}">{{name}}</a></br>
+        {{/park}}
     </ection>
 
     <section>
         <h1>Velostan</h1>
-        <a href="/?start=67R&end={{end}}">
-            Clique
-        </a>
+        {{#velo}}
+            <a href="/?start={{name}}&end={{end}}">{{name}}</a></br>
+        {{/velo}}
     </section>
     
     {{/se}}

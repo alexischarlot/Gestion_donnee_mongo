@@ -46,7 +46,9 @@ db.once('open', function () {
 
 
 	app.get('/', function (req, res) {
-		/*request('https://api.jcdecaux.com/vls/v1/stations?contract=Nancy&apiKey=76f63b7a53281f294547d0317b572d88c1aa041c', {
+		Parking.deleteMany({}, function () {})
+		Velo.deleteMany({}, function () {})
+		request('https://api.jcdecaux.com/vls/v1/stations?contract=Nancy&apiKey=76f63b7a53281f294547d0317b572d88c1aa041c', {
 			json: true
 		}, (err, res, body) => {
 			if (err) {
@@ -65,7 +67,7 @@ db.once('open', function () {
 				})
 				velo.save();
 			});
-		});*/
+		});
 
 		request('https://geoservices.grand-nancy.org/arcgis/rest/services/public/VOIRIE_Parking/MapServer/0/query?where=1%3D1&text=&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&outFields=nom%2Cadresse%2Cplaces%2Ccapacite&returnGeometry=true&returnTrueCurves=false&maxAllowableOffset=&geometryPrecision=&outSR=4326&returnIdsOnly=false&returnCountOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&returnDistinctValues=false&resultOffset=&resultRecordCount=&queryByDistance=&returnExtentsOnly=false&datumTransformation=&parameterValues=&rangeValues=&f=pjson', {
 			json: true
@@ -73,7 +75,6 @@ db.once('open', function () {
 			if (err) {
 				return console.log(err);
 			}
-			console.log(body.features);
 			body.features.forEach(element => {
 				let park = new Parking({
 					name: element.attributes.NOM,
@@ -92,25 +93,37 @@ db.once('open', function () {
 			end: req.query.end
 		});
 	});
-});
 
+	app.get('/dep', function (req, res) {
+		q = '/?start=' + req.query.start + '&end=' + req.query.end;
+		Parking.find({}, function (err, park) {
+			Velo.find({}, function (err, velo) {
+				res.render('interest', {
+					start: req.query.start,
+					end: req.query.end,
+					se: 1,
+					park: park,
+					velo: velo
+				});
+			})
 
-app.get('/dep', function (req, res) {
-	q = '/?start=' + req.query.start + '&end=' + req.query.end;
-	res.render('interest', {
-		start: req.query.start,
-		end: req.query.end,
-		se: 1
+		})
+
+	});
+
+	app.get('/ar', function (req, res) {
+		q = '/?start=' + req.query.start + '&end=' + req.query.end;
+		res.render('interest', {
+			start: req.query.start,
+			end: req.query.end,
+			se: 0
+		});
 	});
 });
 
-app.get('/ar', function (req, res) {
-	q = '/?start=' + req.query.start + '&end=' + req.query.end;
-	res.render('interest', {
-		start: req.query.start,
-		end: req.query.end,
-		se: 0
-	});
-});
+function test() {
+	console.log("work");
+}
+
 
 app.listen(port);
